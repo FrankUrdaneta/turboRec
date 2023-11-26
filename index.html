@@ -105,10 +105,150 @@
     .butt::before {
       background-image: url("./images/Ellipse\ 4.png");
     }
+
+    /* seccion transaccion */
+    .title_transaccion {
+      font-weight: bold;
+      font-size: 24px;
+      color: white;
+      margin-top: 2rem;
+    }
+    .transaccion_volver {
+      position: absolute;
+      left: 4rem;
+      margin-top: 2rem;
+      display: grid;
+    }
+
+    .card {
+      width: 200px;
+      height: 305px;
+      background-image: url("./images//rectangle14.png");
+      background-size: initial;
+      background-position: -33px -41px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: white;
+      border-radius: 2rem;
+      position: absolute;
+      left: 7rem;
+      margin-top: -8rem;
+    }
+
+    .upper-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: left;
+    }
+
+    .lower-section {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .icon {
+      margin-left: auto;
+    }
+    .transactions-container {
+      text-align: center;
+      margin-top: 12rem;
+    }
+
+    .transaction-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .transaction-icon {
+      margin-right: 10px;
+      width: 48px;
+      height: 48px;
+      /* Añade estilos adicionales para el icono si es necesario */
+    }
+
+    .transaction-details {
+      flex-grow: 1;
+      text-align: left;
+      /* Añade estilos adicionales para los detalles si es necesario */
+    }
+
+    .transaction-amount {
+      font-weight: bold;
+      /* Añade estilos adicionales para el importe si es necesario */
+    }
+
+    /* seccion logo de inicio */
+
+    .welcome-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .welcome-image {
+      width: 40px; /* Ajusta el ancho de la imagen según tus necesidades */
+      height: auto;
+      animation: welcomeAnimation 1.5s ease-out; /* Aplica la animación */
+    }
+    .hide {
+      display: none !important;
+      animation: fadeInUp 1s ease-out;
+    }
+    .show {
+      display: block !important;
+      animation: fadeInUp 1s ease-out;
+    }
+    /* Define la animación */
+    @keyframes welcomeAnimation {
+      0% {
+        transform: scale(1);
+      }
+      20% {
+        transform: scale(1.1) translate(0, -5px);
+      }
+      40% {
+        transform: scale(0.9) translate(0, 5px);
+      }
+      60% {
+        transform: scale(1.1) translate(0, -5px);
+      }
+      80% {
+        transform: scale(0.9) translate(0, 5px);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    @keyframes fadeInUp {
+      0% {
+        transform: translateY(-20px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
   </style>
   <body>
-    <div class="container">
-      <!-- Parte superior con la imagen y el texto -->
+    <!-- seccion ingresando pagina -->
+    <section class="welcome-container" id="welcome-container">
+      <img class="welcome-image" src="./images/logo.png" alt="Bienvenida" />
+    </section>
+
+    <!-- seccion home -->
+    <section id="home" class="container" style="display: none">
       <div class="header">
         <div class="logo">
           <img src="./images/LogoWhite.png" alt="logo" />
@@ -122,7 +262,7 @@
       </div>
 
       <!-- Formulario de consulta -->
-      <section class="inputs">
+      <div class="inputs">
         <!-- Input para la tarjeta -->
         <p class="consultar">Consultar Datos</p>
 
@@ -134,6 +274,7 @@
             name="tarjeta"
             class="form-control"
             required
+            autocomplete="off"
           />
         </div>
 
@@ -143,11 +284,12 @@
             >Número de Documento:</label
           >
           <input
-            type="text"
+            type="number"
             id="documento"
             name="documento"
             class="form-control"
             required
+            autocomplete="off"
           />
         </div>
 
@@ -174,8 +316,8 @@
         </p>
 
         <!-- Botón para enviar la consulta -->
-        <button type="submit" class="butt">
-          Consultar
+        <button id="submitButton" onclick="validarFormulario()" class="butt">
+          <span id="text_consultar">Consultar</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -190,9 +332,232 @@
             />
           </svg>
         </button>
-      </section>
-    </div>
+      </div>
+    </section>
 
-    <!-- Agrega aquí el enlace a Bootstrap JS y jQuery si es necesario -->
+    <!-- seccion de transaciones -->
+    <section
+      id="transaccion"
+      class="container transaccion"
+      style="display: none"
+    >
+      <!-- Parte superior con la imagen y el texto -->
+      <div class="header">
+        <div class="transaccion_volver">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="26"
+            height="21"
+            fill="white"
+            class="bi bi-arrow-left"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"
+            />
+          </svg>
+          <p class="title_transaccion">Urdaneta Martin</p>
+        </div>
+        <img
+          class="img_transaccion"
+          src="./images/Rectangle 4.png"
+          alt="seccion transaccion"
+        />
+      </div>
+
+      <!-- Formulario de consulta -->
+      <div class="card">
+        <div class="upper-section">
+          <div class="amount-description">
+            <p style="font-weight: bold; font-size: 24px; margin-bottom: 0">
+              $45000.00
+            </p>
+            <p style="font-weight: bold; font-size: 18px">TIN MONEDERO</p>
+          </div>
+        </div>
+
+        <div class="lower-section">
+          <p style="font-size: 14px; margin-bottom: 0">01/06/2024</p>
+          <p style="font-size: 14px">351887958</p>
+        </div>
+      </div>
+      <div class="transactions-container">
+        <p style="font-weight: bold; font-size: 24px">Transacciones</p>
+
+        <!-- Fila de ejemplo: Viaje -->
+        <div class="transaction-row">
+          <img
+            class="transaction-icon"
+            src="./images//travelIcon.png"
+            alt="Icono Viaje"
+          />
+          <div class="transaction-details">
+            <p style="font-weight: bold; font-size: 18px; margin-bottom: 0">
+              Viaje
+            </p>
+            <p style="font-weight: 100; font-size: 14px">
+              2023-11-17 <span>Mendiolaza- Cordoba</span
+              ><span> Intercordoba</span>
+            </p>
+          </div>
+          <div class="transaction-amount">$50.00</div>
+        </div>
+
+        <!-- Fila de ejemplo: Recarga -->
+        <div class="transaction-row">
+          <img
+            class="transaction-icon"
+            src="./images/ShoppingIcon.png"
+            alt="Icono Recarga"
+          />
+          <div class="transaction-details">
+            <p style="font-weight: bold; font-size: 18px; margin-bottom: 0">
+              Recarga
+            </p>
+            <p style="font-weight: 100; font-size: 14px">
+              2023-11-26 <span>Lumasa, Intercordoba, Sarmiento</span>
+            </p>
+          </div>
+          <div class="transaction-amount">$20.00</div>
+        </div>
+        <div class="transaction-row">
+          <img
+            class="transaction-icon"
+            src="./images//travelIcon.png"
+            alt="Icono Viaje"
+          />
+          <div class="transaction-details">
+            <p style="font-weight: bold; font-size: 18px; margin-bottom: 0">
+              Viaje
+            </p>
+            <p style="font-weight: 100; font-size: 14px">
+              2023-11-17 <span>Mendiolaza- Cordoba</span
+              ><span> Intercordoba</span>
+            </p>
+          </div>
+          <div class="transaction-amount">$50.00</div>
+        </div>
+
+        <!-- Fila de ejemplo: Recarga -->
+        <div class="transaction-row">
+          <img
+            class="transaction-icon"
+            src="./images/ShoppingIcon.png"
+            alt="Icono Recarga"
+          />
+          <div class="transaction-details">
+            <p style="font-weight: bold; font-size: 18px; margin-bottom: 0">
+              Recarga
+            </p>
+            <p style="font-weight: 100; font-size: 14px">
+              2023-11-26 <span>Lumasa, Intercordoba, Sarmiento</span>
+            </p>
+          </div>
+          <div class="transaction-amount">$20.00</div>
+        </div>
+        <div class="transaction-row">
+          <img
+            class="transaction-icon"
+            src="./images//travelIcon.png"
+            alt="Icono Viaje"
+          />
+          <div class="transaction-details">
+            <p style="font-weight: bold; font-size: 18px; margin-bottom: 0">
+              Viaje
+            </p>
+            <p style="font-weight: 100; font-size: 14px">
+              2023-11-17 <span>Mendiolaza- Cordoba</span
+              ><span> Intercordoba</span>
+            </p>
+          </div>
+          <div class="transaction-amount">$50.00</div>
+        </div>
+
+        <!-- Fila de ejemplo: Recarga -->
+        <div class="transaction-row">
+          <img
+            class="transaction-icon"
+            src="./images/ShoppingIcon.png"
+            alt="Icono Recarga"
+          />
+          <div class="transaction-details">
+            <p style="font-weight: bold; font-size: 18px; margin-bottom: 0">
+              Recarga
+            </p>
+            <p style="font-weight: 100; font-size: 14px">
+              2023-11-26 <span>Lumasa, Intercordoba, Sarmiento</span>
+            </p>
+          </div>
+          <div class="transaction-amount">$20.00</div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      function validarFormulario() {
+        var tarjeta = document.getElementById("tarjeta").value;
+        var documento = document.getElementById("documento").value;
+        var robotCheckbox = document.getElementById("robot");
+
+        var submitButton = document.getElementById("submitButton");
+        var text_consultar = document.getElementById("text_consultar");
+
+        // Validar que al menos uno de los campos esté completo
+        if (tarjeta.trim() === "" && documento.trim() === "") {
+          text_consultar.textContent = "Completa al menos un campo";
+          submitButton.style.background = "#F78C8C";
+          submitButton.style.border = "none";
+
+          setTimeout(function () {
+            // Volver al texto y color originales después de 3 segundos
+            text_consultar.textContent = "Consultar";
+            submitButton.style.background = ""; // Vuelve al color original (puede ser otro color)
+          }, 3000);
+
+          return;
+        }
+
+        // Consultar que el checkbox esté tildado
+        if (!robotCheckbox.checked) {
+          text_consultar.textContent = "Marca la casilla 'No soy un robot'";
+          submitButton.style.background = "#F78C8C";
+          submitButton.style.border = "none";
+          setTimeout(function () {
+            // Volver al texto y color originales después de 3 segundos
+            text_consultar.textContent = "Consultar";
+            submitButton.style.background = ""; // Vuelve al color original (puede ser otro color)
+          }, 3000);
+
+          return;
+        }
+
+        setTimeout(function () {
+          const welcomeContainer = document.getElementById("home");
+          welcomeContainer.classList.remove("show");
+          welcomeContainer.classList.add("hide");
+
+          // Muestra la sección home después de que termine la transición de ocultar el contenedor de bienvenida
+          setTimeout(function () {
+            const homeSection = document.getElementById("transaccion");
+            // homeSection.classList.remove("hide");
+            homeSection.classList.add("show");
+          }, 100); // Ajusta el tiempo según la duración de la transición
+        }, 100);
+        // Si pasa ambas validaciones, puedes enviar el formulario o realizar otras acciones
+      }
+
+      setTimeout(function () {
+        const welcomeContainer = document.getElementById("welcome-container");
+        welcomeContainer.classList.add("hide");
+
+        // Muestra la sección home después de que termine la transición de ocultar el contenedor de bienvenida
+        setTimeout(function () {
+          const homeSection = document.getElementById("home");
+          homeSection.classList.remove("hide");
+          homeSection.classList.add("show");
+        }, 1000); // Ajusta el tiempo según la duración de la transición
+      }, 3000);
+    </script>
   </body>
 </html>
