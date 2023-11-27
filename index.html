@@ -205,10 +205,33 @@
       display: none !important;
       animation: fadeInUp 1s ease-out;
     }
+    @keyframes shake {
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+      10%,
+      30%,
+      50%,
+      70%,
+      90% {
+        transform: translateX(-5px);
+      }
+      20%,
+      40%,
+      60%,
+      80% {
+        transform: translateX(5px);
+      }
+    }
     .show {
       display: block !important;
       animation: fadeInUp 1s ease-out;
     }
+    .shake {
+      animation: shake 0.5s ease-in-out infinite;
+    }
+
     /* Define la animación */
     @keyframes welcomeAnimation {
       0% {
@@ -508,7 +531,11 @@
           text_consultar.textContent = "Completa al menos un campo";
           submitButton.style.background = "#F78C8C";
           submitButton.style.border = "none";
-
+          submitButton.classList.add("shake");
+          setTimeout(function () {
+            // Volver al texto y color originales después de 3 segundos
+            submitButton.classList.remove("shake");
+          }, 300);
           setTimeout(function () {
             // Volver al texto y color originales después de 3 segundos
             text_consultar.textContent = "Consultar";
@@ -523,6 +550,13 @@
           text_consultar.textContent = "Marca la casilla 'No soy un robot'";
           submitButton.style.background = "#F78C8C";
           submitButton.style.border = "none";
+
+          submitButton.classList.add("shake");
+
+          setTimeout(function () {
+            // Volver al texto y color originales después de 3 segundos
+            submitButton.classList.remove("shake");
+          }, 300);
           setTimeout(function () {
             // Volver al texto y color originales después de 3 segundos
             text_consultar.textContent = "Consultar";
